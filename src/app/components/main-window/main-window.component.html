@@ -1,0 +1,94 @@
+<div class="loading" *ngIf="dataLoading">Loading&#8230;</div>
+<div class="row noPadding">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                &nbsp;
+        </div>
+</div>
+<div class="row noPadding">
+        <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                &nbsp;
+        </div>
+        <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                &nbsp;
+        </div>
+</div>
+<form>
+        <div class="row noPadding" align="center">
+                <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                        <div *ngIf="productCame">
+                                <mat-form-field class="example-full-width">
+                                        <input type="text" placeholder="Pick one product" aria-label="Number" matInput
+                                                [formControl]="productControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let option of filteredProdOptions | async"
+                                                        [value]="option">
+                                                        {{option}}
+                                                </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-error *ngIf="productControl.errors?.required ">
+                                                Product is required
+                                        </mat-error>
+                                        <mat-error *ngIf="productControl.errors?.forbiddenNames">
+                                                Incorrect product value selected
+                                        </mat-error>
+                                </mat-form-field>
+                        </div>
+
+
+
+
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
+                        <div *ngIf="companyCame">
+                                <mat-form-field class="example-full-width">
+                                        <input type="text" placeholder="Pick one company" aria-label="Number" matInput
+                                                [formControl]="companyControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let option of filteredCompOptions | async"
+                                                        [value]="option">
+                                                        {{option}}
+                                                </mat-option>
+                                        </mat-autocomplete>
+                                        <mat-error *ngIf="companyControl.errors?.required ">
+                                                Company is required
+                                        </mat-error>
+                                        <mat-error *ngIf="companyControl.errors?.forbiddenNames">
+                                                Incorrect company value selected
+                                        </mat-error>
+                                </mat-form-field>
+                        </div>
+                </div>
+        </div>
+
+        <div class="row noPadding" align="center">
+                <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12" *ngIf="everythingSet">
+                        <button md-raised-button (click)="submit()"
+                                [disabled]="companyControl.errors || productControl.errors">Submit</button>
+                </div>
+        </div>
+
+
+
+</form>
+<div class="row noPadding" align="center" *ngIf="dataNull">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                &nbsp;
+        </div>
+</div>
+<div class="row noPadding" align="center" *ngIf="dataNull">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                &nbsp;
+        </div>
+</div>
+
+<div class="row noPadding" align="center" *ngIf="dataNull">
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+        No data available
+        </div>
+</div>
+<div class="row noPadding" align="center" > 
+        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-12">
+                <app-bar-chart [data]="chartData" [showData]="dataChanged"></app-bar-chart>
+        </div>
+ </div> 
